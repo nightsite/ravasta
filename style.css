@@ -184,14 +184,63 @@ input[type="text"]::placeholder, textarea::placeholder { color: #666; }
 
 @keyframes popIn { 0% { opacity: 0; transform: translateY(30px) scale(0.95); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
 
-/* --- RESPONSIVE DESIGN --- */
+/* --- RESPONSIVE DESIGN FÜR HANDYS & TABLETS --- */
+
 @media (max-width: 1000px) { 
-    /* Unter 1000px (Tablets) wird das Grid wieder 1-spaltig */
+    /* Unter 1000px (Tablets) wird das 2x2 Grid wieder zu einer einzigen Spalte */
     .diary-feed { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 900px) { 
+    /* Sidebar (Ohrwurm) rutscht über die Tagebucheinträge */
     .main-layout { grid-template-columns: 1fr; } 
-    .sidebar { order: -1; } 
-    .header-content { flex-direction: column; text-align: center; } 
+    .sidebar { order: -1; margin-bottom: 10px; } 
+    .header-content { flex-direction: column; text-align: center; gap: 15px; } 
+}
+
+@media (max-width: 600px) {
+    /* ECHTE HANDY-OPTIMIERUNG */
+    
+    /* Weniger Rand außenrum für mehr Platz */
+    body { padding: 15px 10px; }
+    
+    /* Header kompakter machen */
+    header { padding: 20px 15px; border-radius: 20px; z-index: 9999; }
+    .header-actions { flex-direction: column; width: 100%; gap: 10px; }
+    .date-search-container, .action-btn { width: 100%; }
+    .icon-btn-header { width: 100%; display: block; }
+
+    /* Dropdown Menü reparieren, damit es auf dem Handy nicht aus dem Bildschirm ragt */
+    .date-dropdown { 
+        position: relative; 
+        top: 10px; 
+        width: 100%; 
+        box-shadow: none; 
+        border: 1px dashed rgba(255,255,255,0.2); 
+    }
+    .date-inputs { justify-content: center; flex-wrap: wrap; }
+    
+    /* Karten kompakter machen */
+    .entry-card { padding: 20px; border-radius: 20px; min-height: auto; }
+    .card-header { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+    .mood-badge { align-self: flex-start; font-size: 0.7rem; }
+    
+    /* Buttons (Stift/Müll) auf dem Handy oben rechts lassen, aber anpassen */
+    .card-actions { top: 20px; right: 20px; gap: 8px; }
+    
+    /* Reaktionen für kleine Bildschirme zentrieren */
+    .reaction-bar { 
+        padding-right: 0; 
+        flex-wrap: wrap; 
+        justify-content: flex-start; 
+        margin-top: 15px; 
+    }
+
+    /* Startbildschirm & Popups anpassen */
+    .login-box { padding: 30px 20px; width: 92%; }
+    .modal-content { padding: 25px 20px; width: 95%; margin: 20% auto; }
+    
+    /* Schriftgrößen leicht verkleinern */
+    .title-area h1 { font-size: 1.8rem; }
+    .entry-text { font-size: 0.9rem; }
 }
