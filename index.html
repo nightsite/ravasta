@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ravasta 💌 - Unser Journal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="login-overlay" class="overlay">
+        <div class="login-box">
+            <h2>Wer schreibt heute? 📖</h2>
+            <p>Willkommen im Ravasta Journal</p>
+            <div class="user-buttons">
+                <button id="btn-asta" class="cute-btn asta-btn">Ich bin Asta ✨</button>
+                <button id="btn-raven" class="cute-btn raven-btn">Ich bin Raven 🌙</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="header-content">
+                <div class="title-area">
+                    <h1>Ravasta ☁️</h1>
+                    <div class="status-area">
+                        <span id="status-asta" class="status-dot"></span> Asta <span class="white-owl">🦉</span>
+                        <span style="margin-left: 15px;"></span>
+                        <span id="status-raven" class="status-dot"></span> Raven <img src="raven.png" class="custom-avatar mini-avatar" alt="Raven">
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="date-search-container">
+                        <button id="search-toggle-btn" class="cute-btn icon-btn-header" title="Nach Datum suchen">🔍</button>
+                        
+                        <div id="date-dropdown" class="date-dropdown">
+                            <div class="date-inputs">
+                                <input type="text" id="filter-dd" placeholder="TT" maxlength="2" class="date-box">
+                                <span>.</span>
+                                <input type="text" id="filter-mm" placeholder="MM" maxlength="2" class="date-box">
+                                <span>.</span>
+                                <input type="text" id="filter-yyyy" placeholder="YYYY" maxlength="4" class="date-box year-box">
+                            </div>
+                            <div class="date-actions">
+                                <button id="apply-date-btn" class="cute-btn mini-submit">Suchen</button>
+                                <button id="clear-date-btn" class="cute-btn mini-clear" title="Filter löschen">✖</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="open-modal-btn" class="cute-btn action-btn">+ Neuer Eintrag</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <div class="feed-wrapper">
+                <main class="diary-feed" id="diary-feed">
+                    </main>
+                
+                <div id="pagination-controls" class="pagination-controls" style="display: none;">
+                    <button id="prev-page-btn" class="cute-btn page-btn">◀ Neuere</button>
+                    <span id="page-info">Seite 1 von 1</span>
+                    <button id="next-page-btn" class="cute-btn page-btn">Ältere ▶</button>
+                </div>
+            </div>
+            
+            <aside class="sidebar">
+                <div class="sidebar-box earworm-box">
+                    <h3>Jetzige Ohrwürmer 🎧</h3>
+                    
+                    <div class="earworm-slot">
+                        <span class="earworm-label"><span class="white-owl">🦉</span> Asta</span>
+                        <div id="spotify-asta" class="spotify-container">Wählt noch...</div>
+                    </div>
+
+                    <div class="earworm-slot">
+                        <span class="earworm-label"><img src="raven.png" class="mini-avatar" alt="Raven"> Raven</span>
+                        <div id="spotify-raven" class="spotify-container">Wählt noch...</div>
+                    </div>
+
+                    <button id="edit-earworm-btn" class="cute-btn update-song-btn">Meinen Song updaten ✏️</button>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <div id="entry-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-entry">×</span>
+            <h2 id="modal-title">Neuer Tagebucheintrag 🌸</h2>
+            <div class="input-group">
+                <label>Wie ist dein Vibe heute? <span id="mood-value">50%</span></label>
+                <input type="range" id="mood-slider" min="1" max="100" value="50" class="cute-slider">
+            </div>
+            <div class="input-group">
+                <label>Dein Eintrag</label>
+                <textarea id="entry-input" placeholder="Liebes Tagebuch, heute war..." rows="6"></textarea>
+            </div>
+            <div class="input-group">
+                <label>Etwas Besonderes? ✨ (Optional)</label>
+                <input type="text" id="special-input" placeholder="Ein Song, ein Gedanke, ein Insider...">
+            </div>
+            <button id="save-btn" class="cute-btn submit-btn">Eintrag speichern 💌</button>
+        </div>
+    </div>
+
+    <div id="delete-modal" class="modal">
+        <div class="modal-content small-modal">
+            <h2>Wirklich löschen? 🥺</h2>
+            <p>Bist du sicher, dass dieser Moment für immer verschwinden soll?</p>
+            <div class="delete-actions">
+                <button id="cancel-delete-btn" class="cute-btn cancel-btn">Abbrechen</button>
+                <button id="confirm-delete-btn" class="cute-btn danger-btn">Ja, löschen</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="earworm-modal" class="modal">
+        <div class="modal-content small-modal">
+            <span class="close-modal" id="close-earworm">×</span>
+            <h2>Dein neuer Ohrwurm 🎶</h2>
+            <p style="color: #a59fb0; font-size: 0.9rem; margin-bottom: 20px;">Füge hier einfach einen Spotify-Link zu einem Song ein.</p>
+            <div class="input-group">
+                <input type="text" id="earworm-input" placeholder="Spotify Link einfügen...">
+            </div>
+            <button id="save-earworm-btn" class="cute-btn submit-btn">Song einstellen ✨</button>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
